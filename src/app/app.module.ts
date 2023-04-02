@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ParametersComponent } from './components/parameters/parameters.component';
 import { TypeComponent } from './components/type/type.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { CatImageComponent } from './components/cat-image/cat-image.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ParametersComponent,
     TypeComponent,
-    FilterComponent
+    FilterComponent,
+    CatImageComponent
   ],
   imports: [
     BrowserModule,

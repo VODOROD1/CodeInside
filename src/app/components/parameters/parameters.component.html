@@ -1,1 +1,58 @@
-<p>parameters works!</p>
+<div class="container mt-5">
+  <div class="row custom-wrapper">
+    <h2 class="mb-3 text-center">Пожалуйста задайте параметры</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- <div class="d-grid"> -->
+      <div class="search-field_card_wrapper">
+        <div class="search-field_card">
+          <div class="form-group">
+            <label for="search-text">Search Text</label>
+            <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
+              [(ngModel)]="searchText" placeholder="Enter text to search" 
+              autofocus>
+          </div>
+          <ul class="list-group list-group-flush">
+            <!-- results of ngFor is passed to appFilter with argument searchText -->
+            <li class="list-group-item" *ngFor="let c of characters | appFilter: searchText">
+              {{c}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <select
+          class="custom-select mb-3"
+          (change)="changeType($event)"
+          formControlName="typeValue"
+        >
+          <option value="">Choose Type</option>
+          <option *ngFor="let type of Types" [ngValue]="type">
+            {{ type }}
+          </option>
+        </select>
+        <!-- error block -->
+        <!-- <div class="invalid-feedback" *ngIf="isSubmitted && typeValue?.invalid">
+          <sup>*</sup>Пожалуйста выберите тип
+        </div> -->
+        <!--  -->
+        <select
+          class="custom-select mb-3"
+          (change)="changeFilter($event)"
+          formControlName="filterValue"
+        >
+          <option value="">Choose Filter</option>
+          <option *ngFor="let filter of Filters" [ngValue]="filter">
+            {{ filter }}
+          </option>
+        </select>
+        <!-- error block -->
+        <!-- <div class="invalid-feedback" *ngIf="isSubmitted && filterValue?.invalid">
+          <sup>*</sup>Пожалуйста выберите фильтр
+        </div> -->
+        <button type="submit" class="btn btn-danger btn-lg btn-block">
+          Найти
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

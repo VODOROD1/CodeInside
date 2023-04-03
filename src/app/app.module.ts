@@ -7,6 +7,8 @@ import { ParametersComponent } from './components/parameters/parameters.componen
 import { TypeComponent } from './components/type/type.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { CatImageComponent } from './components/cat-image/cat-image.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,14 @@ import { CatImageComponent } from './components/cat-image/cat-image.component';
     ParametersComponent,
     TypeComponent,
     FilterComponent,
-    CatImageComponent
+    CatImageComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

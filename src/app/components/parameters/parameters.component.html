@@ -13,7 +13,10 @@
           </div>
           <ul class="list-group list-group-flush">
             <!-- results of ngFor is passed to appFilter with argument searchText -->
-            <li class="list-group-item" *ngFor="let c of characters | appFilter: searchText">
+            <li class="list-group-item" *ngFor="let c of characters | appFilter: searchText"
+                appHighlight [searchedWord]="searchText" [content]="c"  
+                [classToApply]="'font-weight-bold'" [setTitle]="'true'"
+            >
               {{c}}
             </li>
           </ul>

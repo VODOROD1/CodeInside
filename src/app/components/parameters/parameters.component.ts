@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StoreService } from 'src/app/services/store/store.service';
 
 @Component({
   selector: 'app-parameters',
@@ -24,11 +25,12 @@ export class ParametersComponent {
   // City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
   Types: string[] = ['small', 'medium', 'square', 'original'];
   Filters: string[] = ['blur', 'mono', 'sepia', 'negative', 'paint', 'pixel'];
-  constructor(public fb: FormBuilder) {}
+  constructor(public fb: FormBuilder, public store: StoreService) {}
   form: FormGroup = this.fb.group({
-    cityName: ['', [Validators.required]],
+    // cityName: ['', [Validators.required]],
     typeValue: ['', [Validators.required]],
     filterValue: ['', [Validators.required]],
+    searchField: ['', [Validators.required]]
   });
 
   changeType(e: any) {
@@ -52,14 +54,19 @@ export class ParametersComponent {
   }
 
   onSubmit(): void {
-    debugger;
+    let typeValue = this.form.get('typeValue').value?.split(' ')[1]
+    let filterValue = this.form.get('filterValue').value?.split(' ')[1]
+    let searchField = this.form.get('searchField').value
     console.log(this.form);
+    debugger;
     this.isSubmitted = true;
     if (!this.form.valid) {
       false;
     } else {
       console.log(JSON.stringify(this.form.value));
     }
+
+    this.store.getImg();
   }
 
 }

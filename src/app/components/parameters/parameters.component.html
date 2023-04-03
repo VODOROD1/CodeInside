@@ -11,15 +11,15 @@
               [(ngModel)]="searchText" placeholder="Enter text to search" 
               autofocus>
           </div>
-          <ul class="list-group list-group-flush">
+          <!-- <ul class="list-group list-group-flush"> -->
             <!-- results of ngFor is passed to appFilter with argument searchText -->
-            <li class="list-group-item" *ngFor="let c of characters | appFilter: searchText"
+            <!-- <li class="list-group-item" *ngFor="let c of characters | appFilter: searchText"
                 appHighlight [searchedWord]="searchText" [content]="c"  
-                [classToApply]="'font-weight-bold'" [setTitle]="'true'"
+                [classToApply]="'font-weight-bold'" [setTitle]="true"
             >
               {{c}}
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
       <div>

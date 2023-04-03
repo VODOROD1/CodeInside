@@ -8,20 +8,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ParametersComponent {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter()
-
-  title = 'angular-text-search-highlight';
+  // title = 'angular-text-search-highlight';
+  // characters = [
+  //   'Ant-Man',
+  //   'Aquaman',
+  //   'Asterix',
+  //   'The Atom',
+  //   'The Avengers',
+  //   'Batgirl',
+  //   'Batman',
+  //   'Batwoman',
+  // ]
   searchText = '';
-  characters = [
-    'Ant-Man',
-    'Aquaman',
-    'Asterix',
-    'The Atom',
-    'The Avengers',
-    'Batgirl',
-    'Batman',
-    'Batwoman',
-  ]
-
   isSubmitted = false;
   // City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
   Types: string[] = ['small', 'medium', 'square', 'original'];
@@ -54,6 +52,7 @@ export class ParametersComponent {
   }
 
   onSubmit(): void {
+    debugger;
     console.log(this.form);
     this.isSubmitted = true;
     if (!this.form.valid) {

@@ -9,9 +9,15 @@ export class ServerService {
 
   constructor(private http: HttpClient) { }
 
-  getImg(): Observable<any>  {
+  getGif(): Observable<any> {
+    return this.http.get(`https://cataas.com/cat/gif`)
+  }
+
+  getImg() {
     debugger;
-    return this.http.get(`https://cataas.com/cat`)
+    let srcPath = "https://cataas.com/cat"
+    // return this.http.get(`https://cataas.com/cat`)
+    return this.downloadImage(srcPath)
   }
 
   getImgWithTypeFilter(typeValue: string, filterValue: string) {

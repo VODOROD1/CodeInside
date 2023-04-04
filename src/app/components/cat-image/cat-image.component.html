@@ -1,4 +1,8 @@
 <p>cat-image works!</p>
+<p *ngIf="localState.srcString !== ''; else showImg"></p>
+<ng-template #showImg>
+
+</ng-template>
 <div>
-    <img src="https://cataas.com/cat" alt="cat-img"/>
+    <img src="{{localState.srcString}}" alt="cat-img"/>
 </div>

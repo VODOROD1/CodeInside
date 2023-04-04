@@ -26,22 +26,42 @@ export class ParametersComponent implements OnInit {
   Types: string[] = ['small', 'medium', 'square', 'original'];
   Filters: string[] = ['blur', 'mono', 'sepia', 'negative', 'paint', 'pixel'];
   constructor(public fb: FormBuilder, public store: StoreService) {}
+  public localState: any = {
+    typeValue: '',
+    filterValue: '',
+    searchField: ''
+  }
 
   ngOnInit() {
-    let typeValue = ''
-    let filterValue = ''
-    let searchField = ''
-    this.store.setParams(typeValue, filterValue, searchField)
+    // let typeValue = ''
+    // let filterValue = ''
+    // let searchField = ''
+    let {type, filter, searchField} = this.store.getState();
+    this.localState.typeValue = type;
+    this.localState.filterValue = filter;
+    this.localState.searchField = searchField;
+    debugger;
+    // if(sessionStorage.getItem('type')) {
+    //   typeValue = sessionStorage.getItem('type')
+    // }
+    // if(sessionStorage.getItem('filter')) {
+    //   filterValue = sessionStorage.getItem('filter')
+    // }
+
+    // this.store.setParams(typeValue, filterValue, searchField)
   }
 
   form: FormGroup = this.fb.group({
     // cityName: ['', [Validators.required]],
-    typeValue: ['', [Validators.required]],
-    filterValue: ['', [Validators.required]],
-    searchField: ['', [Validators.required]]
+    // typeValue: [this.localState.typeValue, [Validators.required]],
+    // filterValue: [this.localState.filterValue, [Validators.required]],
+    typeValue: ["", [Validators.required]],
+    filterValue: ["", [Validators.required]],
+    searchField: [this.localState.searchField, [Validators.required]]
   });
 
   changeType(e: any) {
+    debugger
     this.typeValue?.setValue(e.target.value, {
       onlySelf: true,
     });
@@ -62,10 +82,27 @@ export class ParametersComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // let typeValue: string = this.form.get('typeValue').value?.split(' ')[1]
-    // let filterValue: string = this.form.get('filterValue').value?.split(' ')[1]
-    let typeValue = "small" // temp data
-    let filterValue = "blur" // temp data
+    // undefined если нет данных в поле
+    let typeValue: string = this.form.get('typeValue').value?.split(' ')[1]
+    let filterValue: string = this.form.get('filterValue').value?.split(' ')[1]
+    let type: string = ''
+    let filter: string = ''
+    if(typeValue) {
+      type = typeValue
+    } 
+    // else if(sessionStorage.getItem('type')) {
+    //   type = sessionStorage.getItem('type')
+    // }
+
+    if(filterValue) {
+      filter = filterValue
+    } 
+    // else if(sessionStorage.getItem('filter')) {
+    //   filter = sessionStorage.getItem('filter')
+    // }
+
+    // let typeValue = "small" // temp data
+    // let filterValue = "blur" // temp data
     let searchField: string = this.form.get('searchField').value
     console.log(this.form);
     debugger;
@@ -75,7 +112,7 @@ export class ParametersComponent implements OnInit {
     } else {
       console.log(JSON.stringify(this.form.value));
     }
-    this.store.setParams(typeValue, filterValue, searchField);
+    // this.store.setParams(typeValue, filterValue, searchField);
     this.store.getImg(typeValue, filterValue, searchField);
   }
 

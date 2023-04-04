@@ -37,7 +37,7 @@ export class StoreService {
   constructor(private serverService: ServerService) {
     let typeValue = sessionStorage.getItem('type') ? sessionStorage.getItem('type') : '';
     let filterValue = sessionStorage.getItem('filter') ? sessionStorage.getItem('filter') : '';
-
+    debugger;
     this.state = {
       type: typeValue,
       filter: filterValue,

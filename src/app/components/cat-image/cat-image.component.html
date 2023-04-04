@@ -1,6 +1,8 @@
 <div *ngIf="localState.currentImgBase64 !== ''; else loader">
-    currentImgBase64 ready to engage
+  currentImgBase64 ready to engage
   <img src="{{ localState.currentImgBase64 }}" alt="cat-img" />
 </div>
 
-<ng-template #loader> Пожалуйста выберите параметры и нажмите кнопку "Найти" </ng-template>
+<ng-template #loader>
+  <h4>Пока что ничего нет :(</h4>
+</ng-template>

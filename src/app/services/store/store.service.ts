@@ -58,6 +58,10 @@ export class StoreService {
     this.state.searchField = searchField;
   }
 
+  getGif() {
+    this.serverService
+  }
+
   // Получить элементы
   getImg(
     typeValue: string = '',

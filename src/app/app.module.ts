@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { HttpClientModule } from '@angular/common/http';
+import { GifButtonComponent } from './components/gif-button/gif-button.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     FilterComponent,
     CatImageComponent,
     FilterPipe,
-    HighlightDirective
+    HighlightDirective,
+    GifButtonComponent
   ],
   imports: [
     BrowserModule,

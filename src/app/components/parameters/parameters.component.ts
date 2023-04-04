@@ -64,6 +64,7 @@ export class ParametersComponent implements OnInit {
   }
 
   onSubmit(): void {
+    debugger
     // undefined если нет данных в поле
     let typeValue: string = this.form.get('typeValue').value?.split(' ')[1]
     let filterValue: string = this.form.get('filterValue').value?.split(' ')[1]
@@ -94,7 +95,6 @@ export class ParametersComponent implements OnInit {
     } else {
       console.log(JSON.stringify(this.form.value));
     }
-    // this.store.setParams(typeValue, filterValue, searchField);
     this.store.getImg(typeValue, filterValue, searchField);
   }
 

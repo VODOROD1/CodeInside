@@ -29,15 +29,7 @@
           (change)="changeType($event)"
           formControlName="typeValue"
         >
-          <!-- <option value="" *ngIf="localState.typeValue !== ''; else chooseType">
-            {{localState.typeValue}}
-          </option>
-          <ng-template #chooseType>
-            <option value="">Choose Type</option>
-          </ng-template> -->
-          
           <option value="">Choose Type</option>
-          
           <option *ngFor="let type of Types" [ngValue]="type">
             {{ type }}
           </option>

@@ -9,20 +9,9 @@ import { StoreService } from 'src/app/services/store/store.service';
 })
 export class ParametersComponent implements OnInit {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter()
-  // title = 'angular-text-search-highlight';
-  // characters = [
-  //   'Ant-Man',
-  //   'Aquaman',
-  //   'Asterix',
-  //   'The Atom',
-  //   'The Avengers',
-  //   'Batgirl',
-  //   'Batman',
-  //   'Batwoman',
-  // ]
+  form: FormGroup;
   searchText = '';
   isSubmitted = false;
-  // City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
   Types: string[] = ['small', 'medium', 'square', 'original'];
   Filters: string[] = ['blur', 'mono', 'sepia', 'negative', 'paint', 'pixel'];
   constructor(public fb: FormBuilder, public store: StoreService) {}
@@ -33,32 +22,40 @@ export class ParametersComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let typeValue = ''
-    // let filterValue = ''
-    // let searchField = ''
+    // Получаем значения полей формы из stor'a
     let {type, filter, searchField} = this.store.getState();
     this.localState.typeValue = type;
     this.localState.filterValue = filter;
     this.localState.searchField = searchField;
     debugger;
-    // if(sessionStorage.getItem('type')) {
-    //   typeValue = sessionStorage.getItem('type')
-    // }
-    // if(sessionStorage.getItem('filter')) {
-    //   filterValue = sessionStorage.getItem('filter')
-    // }
-
-    // this.store.setParams(typeValue, filterValue, searchField)
+    // Инициализируем форму
+    let temp1 = `${this.Types.indexOf(this.localState.typeValue) + 1}: ${this.localState.typeValue}`
+    let temp2 = `${this.Filters.indexOf(this.localState.filterValue) + 1}: ${this.localState.filterValue}`
+    debugger;
+    this.form = this.fb.group({
+      // задаем поля формы следующим образом:
+      // 1) указываем номер option'a
+      // 2) задаем значение сохраненное из sessionStorage
+      typeValue: [`${this.Types.indexOf(this.localState.typeValue) + 1}: ${this.localState.typeValue}`, [Validators.required]],
+      // typeValue: [this.localState.typeValue, [Validators.required]],
+      filterValue: [`${this.Filters.indexOf(this.localState.filterValue) + 1}: ${this.localState.filterValue}`, [Validators.required]],
+      // filterValue: [this.localState.filterValue, [Validators.required]],
+      // typeValue: ["", [Validators.required]],
+      // filterValue: ["", [Validators.required]],
+      searchField: [this.localState.searchField, [Validators.required]]
+    });
   }
 
-  form: FormGroup = this.fb.group({
-    // cityName: ['', [Validators.required]],
-    // typeValue: [this.localState.typeValue, [Validators.required]],
-    // filterValue: [this.localState.filterValue, [Validators.required]],
-    typeValue: ["", [Validators.required]],
-    filterValue: ["", [Validators.required]],
-    searchField: [this.localState.searchField, [Validators.required]]
-  });
+  // form: FormGroup = this.fb.group({
+  //   // задаем поля формы следующим образом:
+  //   // 1) указываем номер option'a
+  //   // 2) задаем значение сохраненное из sessionStorage
+  //   typeValue: [`${this.Types.indexOf(this.localState.typeValue) + 1}: ${this.localState.typeValue}`, [Validators.required]],
+  //   filterValue: [this.localState.filterValue, [Validators.required]],
+  //   // typeValue: ["", [Validators.required]],
+  //   // filterValue: ["", [Validators.required]],
+  //   searchField: [this.localState.searchField, [Validators.required]]
+  // });
 
   changeType(e: any) {
     debugger

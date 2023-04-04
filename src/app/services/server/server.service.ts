@@ -9,8 +9,10 @@ export class ServerService {
 
   constructor(private http: HttpClient) { }
 
-  getGif(): Observable<any> {
-    return this.http.get(`https://cataas.com/cat/gif`)
+  getGif() {
+    debugger;
+    let srcPath = `https://cataas.com/cat/gif`
+    return this.downloadImage(srcPath)
   }
 
   getImg() {

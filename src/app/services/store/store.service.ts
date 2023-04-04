@@ -63,20 +63,16 @@ export class StoreService {
   }
 
   getGif() {
-    this.serverService.getGif().subscribe({
-      next: (v) => {
-        console.log(v);
-        debugger;
-      },
-      error: (e) => {
-        console.log(e);
-        debugger;
-      },
-      complete: () => {
-        console.info('complete');
-        debugger;
-      },
-    });
+    this.serverService.getGif().then(
+      async (image) => {
+        const imageBlog = await image.blob();
+        let reader = new FileReader();
+        reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
+        reader.onload = () => {
+          this.state.currentImgBase64 = reader.result;
+          this.state.imgArr.push(reader.result);
+        };
+      });
   }
 
   // Получить элементы

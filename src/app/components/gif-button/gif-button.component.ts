@@ -13,6 +13,6 @@ export class GifButtonComponent {
   }
 
   clickSubmit() {
-    this.store.getGif
+    this.store.getGif()
   }
 }

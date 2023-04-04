@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="row custom-wrapper">
-    <h2 class="mb-3 text-center">Пожалуйста выберите параметры и нажмите кнопку "Найти"</h2>
+    <h2 class="mb-3 text-center">Пожалуйста выберите параметры и нажмите кнопку "Найти картинку"</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- <div class="d-grid"> -->
       <div class="search-field_card_wrapper">
@@ -22,6 +22,11 @@
             </li>
           </ul> -->
         </div>
+      </div>
+      <div class="btn-gif_wrapper">
+        <button type="submit" class="btn-gif btn btn-danger btn-lg btn-block">
+          Найти случайное gif-изображение
+        </button>
       </div>
       <div>
         <select
@@ -54,7 +59,7 @@
           <sup>*</sup>Пожалуйста выберите фильтр
         </div> -->
         <button type="submit" class="btn btn-danger btn-lg btn-block">
-          Найти
+          Найти картинку
         </button>
       </div>
     </form>

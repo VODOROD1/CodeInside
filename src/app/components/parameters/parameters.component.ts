@@ -14,12 +14,12 @@ export class ParametersComponent implements OnInit {
   isSubmitted = false;
   Types: string[] = ['small', 'medium', 'square', 'original'];
   Filters: string[] = ['blur', 'mono', 'sepia', 'negative', 'paint', 'pixel'];
-  constructor(public fb: FormBuilder, public store: StoreService) {}
   public localState: any = {
     typeValue: '',
     filterValue: '',
     searchField: ''
   }
+  constructor(public fb: FormBuilder, public store: StoreService) {}
 
   ngOnInit() {
     // Получаем значения полей формы из stor'a
@@ -37,25 +37,10 @@ export class ParametersComponent implements OnInit {
       // 1) указываем номер option'a
       // 2) задаем значение сохраненное из sessionStorage
       typeValue: [`${this.Types.indexOf(this.localState.typeValue) + 1}: ${this.localState.typeValue}`, [Validators.required]],
-      // typeValue: [this.localState.typeValue, [Validators.required]],
       filterValue: [`${this.Filters.indexOf(this.localState.filterValue) + 1}: ${this.localState.filterValue}`, [Validators.required]],
-      // filterValue: [this.localState.filterValue, [Validators.required]],
-      // typeValue: ["", [Validators.required]],
-      // filterValue: ["", [Validators.required]],
       searchField: [this.localState.searchField, [Validators.required]]
     });
   }
-
-  // form: FormGroup = this.fb.group({
-  //   // задаем поля формы следующим образом:
-  //   // 1) указываем номер option'a
-  //   // 2) задаем значение сохраненное из sessionStorage
-  //   typeValue: [`${this.Types.indexOf(this.localState.typeValue) + 1}: ${this.localState.typeValue}`, [Validators.required]],
-  //   filterValue: [this.localState.filterValue, [Validators.required]],
-  //   // typeValue: ["", [Validators.required]],
-  //   // filterValue: ["", [Validators.required]],
-  //   searchField: [this.localState.searchField, [Validators.required]]
-  // });
 
   changeType(e: any) {
     debugger

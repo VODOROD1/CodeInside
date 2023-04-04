@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ServerService } from '../server/server.service';
 
-class IState{
+export class IState{
   type: string;
   filter: string;
   searchField: string;
   imgArr: string[];
-  currentImgBLOB?: string;
+  currentImgBase64?: string | ArrayBuffer;
 
   constructor(
     type: string,
@@ -39,7 +39,7 @@ export class StoreService {
       type: '',
       filter: '',
       searchField: '',
-      currentImgBLOB: '',
+      currentImgBase64: '',
       imgArr: [],
     };
   }
@@ -69,9 +69,18 @@ export class StoreService {
           debugger
           const imageBlog = await image.blob()
           debugger
-          const imageURL = URL.createObjectURL(imageBlog)
-          debugger
-          this.state.currentImgBLOB = imageURL
+          // const imageURL = URL.createObjectURL(imageBlog)
+          // debugger
+          // this.state.currentImgBase64 = imageURL
+          let reader = new FileReader();
+          reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
+
+          reader.onload = () => {
+            // link.href = reader.result; // url с данными
+            // link.click();
+            this.state.currentImgBase64 = reader.result
+            // this.state.
+          };
           debugger
         }, (err) => {
           debugger

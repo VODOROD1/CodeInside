@@ -1,8 +1,6 @@
-<p>cat-image works!</p>
-<p *ngIf="localState.srcString !== ''; else showImg"></p>
-<ng-template #showImg>
-
-</ng-template>
-<div>
-    <img src="{{localState.srcString}}" alt="cat-img"/>
+<div *ngIf="localState.currentImgBase64 !== ''; else loader">
+    currentImgBase64 ready to engage
+  <img src="{{ localState.currentImgBase64 }}" alt="cat-img" />
 </div>
+
+<ng-template #loader> Пожалуйста выберите параметры и нажмите кнопку "Найти" </ng-template>

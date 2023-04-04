@@ -5,14 +5,14 @@ export class IState{
   type: string;
   filter: string;
   searchField: string;
-  imgArr: string[];
+  imgArr: Array<string | ArrayBuffer>;
   currentImgBase64?: string | ArrayBuffer;
 
   constructor(
     type: string,
     filter: string,
     searchField: string,
-    imgArr: string[],
+    imgArr: Array<string | ArrayBuffer>,
   ) {
     this.type = type
     this.filter = filter
@@ -79,7 +79,8 @@ export class StoreService {
             // link.href = reader.result; // url с данными
             // link.click();
             this.state.currentImgBase64 = reader.result
-            // this.state.
+            this.state.imgArr.push(reader.result)
+            this.saveToSessionStorage(typeValue, filterValue)
           };
           debugger
         }, (err) => {
@@ -121,5 +122,10 @@ export class StoreService {
       });
     }
     // )
+  }
+
+  public saveToSessionStorage(type: string, filter: string) {
+    sessionStorage.setItem('type', type);
+    sessionStorage.setItem('filter', filter);
   }
 }

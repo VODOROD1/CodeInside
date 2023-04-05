@@ -68,6 +68,7 @@ export class ParametersComponent implements OnInit {
     // undefined если нет данных в поле
     let typeValue: string = this.form.get('typeValue').value?.split(' ')[1]
     let filterValue: string = this.form.get('filterValue').value?.split(' ')[1]
+    let searchField: string = this.form.get('searchField').value
     let type: string = ''
     let filter: string = ''
     if(typeValue) {
@@ -86,9 +87,7 @@ export class ParametersComponent implements OnInit {
 
     // let typeValue = "small" // temp data
     // let filterValue = "blur" // temp data
-    let searchField: string = this.form.get('searchField').value
-    console.log(this.form);
-    debugger;
+
     this.isSubmitted = true;
     if (!this.form.valid) {
       false;

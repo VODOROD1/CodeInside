@@ -15,16 +15,17 @@ export class ServerService {
     return this.downloadImage(srcPath)
   }
 
-  getImg() {
+  getImg(searchField: string) {
     debugger;
-    let srcPath = "https://cataas.com/cat"
+    let srcPath = searchField !== '' ? `https://cataas.com/cat/says/${searchField}` : "https://cataas.com/cat"
     // return this.http.get(`https://cataas.com/cat`)
     return this.downloadImage(srcPath)
   }
 
-  getImgWithTypeFilter(typeValue: string, filterValue: string) {
+  getImgWithTypeFilter(typeValue: string, filterValue: string, searchField: string) {
     debugger;
-    let srcPath = `https://cataas.com/cat?type=${typeValue}&filter=${filterValue}`
+    let srcPath = searchField !== '' ? `https://cataas.com/cat/says/${searchField}?type=${typeValue}&filter=${filterValue}` : `https://cataas.com/cat?type=${typeValue}&filter=${filterValue}`
+    // let srcPath = `https://cataas.com/cat?type=${typeValue}&filter=${filterValue}`
     
     return this.downloadImage(srcPath)
     // fetchObj.then((res) => {

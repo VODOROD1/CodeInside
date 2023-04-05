@@ -104,7 +104,7 @@ export class StoreService {
   ): any {
     let errorMessage: string = '';
     if (typeValue !== '' || filterValue !== '') {
-      this.serverService.getImgWithTypeFilter(typeValue, filterValue).then(
+      this.serverService.getImgWithTypeFilter(typeValue, filterValue, searchField).then(
         async (image) => {
           const imageBlog = await image.blob();
           let reader = new FileReader();
@@ -129,7 +129,7 @@ export class StoreService {
         }
       );
     } else {
-      this.serverService.getImg().then(async (image) => {
+      this.serverService.getImg(searchField).then(async (image) => {
         const imageBlog = await image.blob();
         let reader = new FileReader();
         reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
@@ -187,6 +187,8 @@ export class StoreService {
   }
 
   refreshImg(currentImgBase64: ICurrentImgBase64) {
+    // Указал для очевидности
+    // Присваиваем ключ той картинки, которую перезагружаем
     let keyRefreshedImg = currentImgBase64.key;
     this.serverService.downloadImage(this.state.imgArr.get(keyRefreshedImg).url)
     .then(async (image) => {

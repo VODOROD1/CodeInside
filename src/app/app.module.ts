@@ -11,6 +11,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { GifButtonComponent } from './components/gif-button/gif-button.component';
+import { BackForwardButtonComponent } from './components/back-forward-button/back-forward-button.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GifButtonComponent } from './components/gif-button/gif-button.component
     CatImageComponent,
     FilterPipe,
     HighlightDirective,
-    GifButtonComponent
+    GifButtonComponent,
+    BackForwardButtonComponent
   ],
   imports: [
     BrowserModule,

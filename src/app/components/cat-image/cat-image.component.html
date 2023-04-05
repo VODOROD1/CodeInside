@@ -1,6 +1,5 @@
-<div *ngIf="localState.currentImgBase64 !== ''; else loader">
-  currentImgBase64 ready to engage
-  <img src="{{ localState.currentImgBase64 }}" alt="cat-img" />
+<div *ngIf="localState.currentImgBase64.value  !== ''; else loader">
+  <img src="{{ localState.currentImgBase64.value }}" alt="cat-img" />
 </div>
 
 <ng-template #loader>

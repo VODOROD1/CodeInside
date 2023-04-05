@@ -5,9 +5,11 @@ export class IState {
   type: string;
   filter: string;
   searchField: string;
-  // imgArr: Array<string | ArrayBuffer>;
+  currentImgBase64?: {
+    key: number;
+    value: string | ArrayBuffer;
+  };
   imgArr: Map<number, string | ArrayBuffer>;
-  currentImgBase64?: string | ArrayBuffer;
 
   constructor(
     type: string,
@@ -47,7 +49,10 @@ export class StoreService {
       type: typeValue,
       filter: filterValue,
       searchField: '',
-      currentImgBase64: '',
+      currentImgBase64: {
+        key: 0,
+        value: '',
+      },
       imgArr: new Map(),
     };
   }
@@ -64,19 +69,18 @@ export class StoreService {
   }
 
   getGif() {
-    this.serverService.getGif().then(
-      async (image) => {
-        const imageBlog = await image.blob();
-        let reader = new FileReader();
-        reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
-        reader.onload = () => {
-          // this.state.currentImgBase64 = reader.result;
-          // this.state.imgArr.push(reader.result);
-          
-          this.state.imgArr.set(this.state.imgArr.size+1, reader.result)
-          this.state.currentImgBase64 = this.state.imgArr.get(this.state.imgArr.size)
-        };
-      });
+    this.serverService.getGif().then(async (image) => {
+      const imageBlog = await image.blob();
+      let reader = new FileReader();
+      reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
+      reader.onload = () => {
+        // Помещаем новый элемент в конец коллекции
+        this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+        this.state.currentImgBase64.key = this.state.imgArr.size + 1;
+        this.state.currentImgBase64.value = reader.result;
+        debugger;
+      };
+    });
   }
 
   // Получить элементы
@@ -93,9 +97,12 @@ export class StoreService {
           let reader = new FileReader();
           reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
           reader.onload = () => {
-            this.state.currentImgBase64 = reader.result;
-            // this.state.imgArr.push(reader.result);
-            this.state.imgArr.set(this.state.imgArr.size+1, reader.result);
+            this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+            // this.state.currentImgBase64.clear();
+            // this.state.currentImgBase64.set(this.state.imgArr.size+1, reader.result);
+            this.state.currentImgBase64.key = this.state.imgArr.size + 1;
+            this.state.currentImgBase64.value = reader.result;
+            // Сохраняем тип и фильтр в sessionStorage
             this.saveToSessionStorage(typeValue, filterValue);
           };
         },
@@ -104,15 +111,18 @@ export class StoreService {
         }
       );
     } else {
-      this.serverService.getImg().then(
-      async (image) => {
+      this.serverService.getImg().then(async (image) => {
         const imageBlog = await image.blob();
         let reader = new FileReader();
         reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
         reader.onload = () => {
-          this.state.currentImgBase64 = reader.result;
           // this.state.imgArr.push(reader.result);
-          this.state.imgArr.set(this.state.imgArr.size+1, reader.result);
+          this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+          // this.state.currentImgBase64.clear();
+          // this.state.currentImgBase64.set(this.state.imgArr.size+1, reader.result);
+          this.state.currentImgBase64.key = this.state.imgArr.size + 1;
+          this.state.currentImgBase64.value = reader.result;
+          // Сохраняем тип и фильтр в sessionStorage
           this.saveToSessionStorage(typeValue, filterValue);
         };
       });

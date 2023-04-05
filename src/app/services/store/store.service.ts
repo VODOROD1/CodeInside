@@ -5,14 +5,15 @@ export class IState {
   type: string;
   filter: string;
   searchField: string;
-  imgArr: Array<string | ArrayBuffer>;
+  // imgArr: Array<string | ArrayBuffer>;
+  imgArr: Map<number, string | ArrayBuffer>;
   currentImgBase64?: string | ArrayBuffer;
 
   constructor(
     type: string,
     filter: string,
     searchField: string,
-    imgArr: Array<string | ArrayBuffer>
+    imgArr: Map<number, string | ArrayBuffer>
   ) {
     this.type = type;
     this.filter = filter;
@@ -47,7 +48,7 @@ export class StoreService {
       filter: filterValue,
       searchField: '',
       currentImgBase64: '',
-      imgArr: [],
+      imgArr: new Map(),
     };
   }
 
@@ -69,8 +70,11 @@ export class StoreService {
         let reader = new FileReader();
         reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
         reader.onload = () => {
-          this.state.currentImgBase64 = reader.result;
-          this.state.imgArr.push(reader.result);
+          // this.state.currentImgBase64 = reader.result;
+          // this.state.imgArr.push(reader.result);
+          
+          this.state.imgArr.set(this.state.imgArr.size+1, reader.result)
+          this.state.currentImgBase64 = this.state.imgArr.get(this.state.imgArr.size)
         };
       });
   }
@@ -90,7 +94,8 @@ export class StoreService {
           reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
           reader.onload = () => {
             this.state.currentImgBase64 = reader.result;
-            this.state.imgArr.push(reader.result);
+            // this.state.imgArr.push(reader.result);
+            this.state.imgArr.set(this.state.imgArr.size+1, reader.result);
             this.saveToSessionStorage(typeValue, filterValue);
           };
         },
@@ -106,7 +111,8 @@ export class StoreService {
         reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
         reader.onload = () => {
           this.state.currentImgBase64 = reader.result;
-          this.state.imgArr.push(reader.result);
+          // this.state.imgArr.push(reader.result);
+          this.state.imgArr.set(this.state.imgArr.size+1, reader.result);
           this.saveToSessionStorage(typeValue, filterValue);
         };
       });

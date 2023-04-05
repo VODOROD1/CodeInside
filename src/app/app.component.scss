@@ -63,14 +63,17 @@ p {
 }
 
 .wrapper {
-  // position: relative;
+  position: relative;
 	min-height: 100%;
-  padding-top: 140px !important;
+}
+
+.main {
+  margin: 150px auto 0px auto;
 }
 
 .parameters {
   // margin: 50px auto;
-  margin: 50px auto;
+  margin: 20px auto 50px auto;
 }
 
 .content {

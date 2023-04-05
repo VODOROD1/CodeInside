@@ -6,14 +6,16 @@ interface IimgArr {
   url: string
 }
 
+interface ICurrentImgBase64 {
+  key: number;
+  value: string | ArrayBuffer
+}
+
 export class IState {
   type: string;
   filter: string;
   searchField: string;
-  currentImgBase64?: {
-    key: number;
-    value: string | ArrayBuffer
-  };
+  currentImgBase64?: ICurrentImgBase64;
   // imgArr: Map<number, string | ArrayBuffer>;
   imgArr: Map<number, IimgArr>;
 
@@ -182,5 +184,27 @@ export class StoreService {
       this.state.currentImgBase64.key = currentKey + 1
       this.state.currentImgBase64.value = this.state.imgArr.get(currentKey+1).imgBase64;
     }
+  }
+
+  refreshImg(currentImgBase64: ICurrentImgBase64) {
+    let keyRefreshedImg = currentImgBase64.key;
+    this.serverService.downloadImage(this.state.imgArr.get(keyRefreshedImg).url)
+    .then(async (image) => {
+      debugger;
+      const imageBlog = await image.blob();
+      let reader = new FileReader();
+      reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
+      reader.onload = () => {
+        // Помещаем новый элемент в конец коллекции
+        // this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+        this.state.imgArr.set(keyRefreshedImg, {
+          imgBase64: reader.result,
+          url: image.url
+        });
+        this.state.currentImgBase64.key = keyRefreshedImg;
+        this.state.currentImgBase64.value = reader.result;
+        debugger;
+      };
+    });
   }
 }

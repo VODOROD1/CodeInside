@@ -1,6 +1,6 @@
 <div *ngIf="localState.currentImgBase64.value !== ''; else loader">
   <img src="{{ localState.currentImgBase64.value }}" alt="cat-img" />
-  <div class="refresh" (click)="clickSubmit(localState.currentImgBase64.value)">
+  <div class="refresh" (click)="refreshSubmit(localState.currentImgBase64)">
   </div>
 </div>
 

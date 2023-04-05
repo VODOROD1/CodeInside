@@ -27,7 +27,7 @@ export class CatImageComponent implements OnInit {
 
   }
 
-  clickSubmit(value: any) {
-    
+  refreshSubmit(currentImgBase64: any) {
+    this.store.refreshImg(currentImgBase64)
   }
 }

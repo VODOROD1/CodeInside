@@ -76,7 +76,7 @@ export class StoreService {
       reader.onload = () => {
         // Помещаем новый элемент в конец коллекции
         this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
-        this.state.currentImgBase64.key = this.state.imgArr.size + 1;
+        this.state.currentImgBase64.key = this.state.imgArr.size;
         this.state.currentImgBase64.value = reader.result;
         debugger;
       };
@@ -97,10 +97,11 @@ export class StoreService {
           let reader = new FileReader();
           reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
           reader.onload = () => {
+            debugger;
             this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
             // this.state.currentImgBase64.clear();
             // this.state.currentImgBase64.set(this.state.imgArr.size+1, reader.result);
-            this.state.currentImgBase64.key = this.state.imgArr.size + 1;
+            this.state.currentImgBase64.key = this.state.imgArr.size;
             this.state.currentImgBase64.value = reader.result;
             // Сохраняем тип и фильтр в sessionStorage
             this.saveToSessionStorage(typeValue, filterValue);
@@ -120,7 +121,7 @@ export class StoreService {
           this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
           // this.state.currentImgBase64.clear();
           // this.state.currentImgBase64.set(this.state.imgArr.size+1, reader.result);
-          this.state.currentImgBase64.key = this.state.imgArr.size + 1;
+          this.state.currentImgBase64.key = this.state.imgArr.size;
           this.state.currentImgBase64.value = reader.result;
           // Сохраняем тип и фильтр в sessionStorage
           this.saveToSessionStorage(typeValue, filterValue);
@@ -149,5 +150,19 @@ export class StoreService {
   public saveToSessionStorage(type: string, filter: string) {
     sessionStorage.setItem('type', type);
     sessionStorage.setItem('filter', filter);
+  }
+
+  switchCurrentImgBase64(direction: string) {
+    let currentKey: number = this.state.currentImgBase64.key;
+    if(direction === 'back') {
+      debugger;
+      // Отступаем на один элемент назад в коллекции
+      this.state.currentImgBase64.key = currentKey - 1
+      this.state.currentImgBase64.value = this.state.imgArr.get(currentKey-1)
+    } else if(direction === 'forward') {
+      // Наступаем на один элемент вперед в коллекции
+      this.state.currentImgBase64.key = currentKey + 1
+      this.state.currentImgBase64.value = this.state.imgArr.get(currentKey+1)
+    }
   }
 }

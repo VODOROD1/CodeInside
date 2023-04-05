@@ -1,5 +1,7 @@
-<div *ngIf="localState.currentImgBase64.value  !== ''; else loader">
+<div *ngIf="localState.currentImgBase64.value !== ''; else loader">
   <img src="{{ localState.currentImgBase64.value }}" alt="cat-img" />
+  <div class="refresh">
+  </div>
 </div>
 
 <ng-template #loader>

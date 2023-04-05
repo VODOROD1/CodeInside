@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
 import { ServerService } from '../server/server.service';
 
+interface IimgArr {
+  imgBase64: string | ArrayBuffer;
+  url: string
+}
+
 export class IState {
   type: string;
   filter: string;
   searchField: string;
   currentImgBase64?: {
     key: number;
-    value: string | ArrayBuffer;
+    value: string | ArrayBuffer
   };
-  imgArr: Map<number, string | ArrayBuffer>;
+  // imgArr: Map<number, string | ArrayBuffer>;
+  imgArr: Map<number, IimgArr>;
 
   constructor(
     type: string,
     filter: string,
     searchField: string,
-    imgArr: Map<number, string | ArrayBuffer>
+    imgArr: Map<number, IimgArr>
   ) {
     this.type = type;
     this.filter = filter;
@@ -51,7 +57,7 @@ export class StoreService {
       searchField: '',
       currentImgBase64: {
         key: 0,
-        value: '',
+        value: ''
       },
       imgArr: new Map(),
     };
@@ -70,12 +76,17 @@ export class StoreService {
 
   getGif() {
     this.serverService.getGif().then(async (image) => {
+      debugger;
       const imageBlog = await image.blob();
       let reader = new FileReader();
       reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
       reader.onload = () => {
         // Помещаем новый элемент в конец коллекции
-        this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+        // this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+        this.state.imgArr.set(this.state.imgArr.size + 1, {
+          imgBase64: reader.result,
+          url: image.url
+        });
         this.state.currentImgBase64.key = this.state.imgArr.size;
         this.state.currentImgBase64.value = reader.result;
         debugger;
@@ -98,7 +109,11 @@ export class StoreService {
           reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
           reader.onload = () => {
             debugger;
-            this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+            // this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+            this.state.imgArr.set(this.state.imgArr.size + 1, {
+              imgBase64: reader.result,
+              url: image.url
+            });
             // this.state.currentImgBase64.clear();
             // this.state.currentImgBase64.set(this.state.imgArr.size+1, reader.result);
             this.state.currentImgBase64.key = this.state.imgArr.size;
@@ -118,7 +133,10 @@ export class StoreService {
         reader.readAsDataURL(imageBlog); // конвертирует Blob в base64 и вызывает onload
         reader.onload = () => {
           // this.state.imgArr.push(reader.result);
-          this.state.imgArr.set(this.state.imgArr.size + 1, reader.result);
+          this.state.imgArr.set(this.state.imgArr.size + 1, {
+            imgBase64: reader.result,
+            url: image.url
+          });
           // this.state.currentImgBase64.clear();
           // this.state.currentImgBase64.set(this.state.imgArr.size+1, reader.result);
           this.state.currentImgBase64.key = this.state.imgArr.size;
@@ -158,11 +176,11 @@ export class StoreService {
       debugger;
       // Отступаем на один элемент назад в коллекции
       this.state.currentImgBase64.key = currentKey - 1
-      this.state.currentImgBase64.value = this.state.imgArr.get(currentKey-1)
+      this.state.currentImgBase64.value = this.state.imgArr.get(currentKey-1).imgBase64;
     } else if(direction === 'forward') {
       // Наступаем на один элемент вперед в коллекции
       this.state.currentImgBase64.key = currentKey + 1
-      this.state.currentImgBase64.value = this.state.imgArr.get(currentKey+1)
+      this.state.currentImgBase64.value = this.state.imgArr.get(currentKey+1).imgBase64;
     }
   }
 }

@@ -26,4 +26,8 @@ export class CatImageComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  clickSubmit(value: any) {
+    
+  }
 }

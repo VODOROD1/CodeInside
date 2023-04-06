@@ -10,7 +10,7 @@
         localState.imgArr.size === 1
       "
     >
-      назад
+      < назад
     </button>
     <button
       (click)="clickForwardSubmit()"
@@ -20,13 +20,8 @@
         localState.currentImgBase64.key === 0
       "
       >
-      вперед
+      вперед >
     </button>
-    <div>
-        <a href="#">
-          <span class="icon-cw"></span>
-          <span class="screen-reader-text">Refresh</span>
-        </a>
-    </div>
+    <app-refresh-button></app-refresh-button>
   </div>
 </div>

@@ -14,9 +14,6 @@ interface IlocalState {
 
 export class CatImageComponent implements OnInit {
   public srcString: string;
-  // public localState: IlocalState = {
-  //   srcString: ''
-  // }
   public localState: IState;
 
   constructor(public store: StoreService) {
@@ -25,9 +22,5 @@ export class CatImageComponent implements OnInit {
 
   ngOnInit() {
 
-  }
-
-  refreshSubmit(currentImgBase64: any) {
-    this.store.refreshImg(currentImgBase64)
   }
 }

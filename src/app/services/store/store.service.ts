@@ -186,10 +186,10 @@ export class StoreService {
     }
   }
 
-  refreshImg(currentImgBase64: ICurrentImgBase64) {
+  refreshImg() {
     // Указал для очевидности
     // Присваиваем ключ той картинки, которую перезагружаем
-    let keyRefreshedImg = currentImgBase64.key;
+    let keyRefreshedImg = this.state.currentImgBase64.key;
     this.serverService.downloadImage(this.state.imgArr.get(keyRefreshedImg).url)
     .then(async (image) => {
       debugger;

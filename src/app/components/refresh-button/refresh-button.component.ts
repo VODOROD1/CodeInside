@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StoreService } from 'src/app/services/store/store.service';
 
 @Component({
   selector: 'app-refresh-button',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class RefreshButtonComponent {
 
+  constructor(public store: StoreService) {
+
+  }
+
+  refreshSubmit() {
+    this.store.refreshImg()
+  }
 }

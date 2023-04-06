@@ -29,7 +29,7 @@
           (change)="changeType($event)"
           formControlName="typeValue"
         >
-          <option value="">Choose Type</option>
+          <option value="">Выберите тип</option>
           <option *ngFor="let type of Types" [ngValue]="type">
             {{ type }}
           </option>
@@ -44,7 +44,7 @@
           (change)="changeFilter($event)"
           formControlName="filterValue"
         >
-          <option value="">Choose Filter</option>
+          <option value="">Выберите фильтр</option>
           <option *ngFor="let filter of Filters" [ngValue]="filter">
             {{ filter }}
           </option>

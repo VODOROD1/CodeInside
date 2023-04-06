@@ -12,6 +12,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { GifButtonComponent } from './components/gif-button/gif-button.component';
 import { BackForwardButtonComponent } from './components/back-forward-button/back-forward-button.component';
+import { RefreshButtonComponent } from './components/refresh-button/refresh-button.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BackForwardButtonComponent } from './components/back-forward-button/bac
     FilterPipe,
     HighlightDirective,
     GifButtonComponent,
-    BackForwardButtonComponent
+    BackForwardButtonComponent,
+    RefreshButtonComponent
   ],
   imports: [
     BrowserModule,

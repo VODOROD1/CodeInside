@@ -55,7 +55,15 @@ p {
 
 .wrapper {
   position: relative;
-	min-height: 100%;
+  margin: 0 auto 80px;
+}
+
+.content {
+  min-height: 400px;
+}
+
+.push {
+  height: 80px;
 }
 
 .main {
@@ -137,16 +145,11 @@ p {
 }
 
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  text-align: center;
   line-height: 20px;
   width: 100%;
   height: 80px;
-  position: absolute;
-  bottom: -150px;
-  left: 0;
-  right: 0;
   background-color: black;
   border: 2px solid #ffc200;
 }

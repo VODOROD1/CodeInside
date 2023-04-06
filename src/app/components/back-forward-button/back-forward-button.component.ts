@@ -14,7 +14,6 @@ export class BackForwardButtonComponent {
   }
 
   clickBackSubmit() {
-    debugger;
     this.store.switchCurrentImgBase64('back');
   }
 

@@ -27,11 +27,6 @@ export class ParametersComponent implements OnInit {
     this.localState.typeValue = type;
     this.localState.filterValue = filter;
     this.localState.searchField = searchField;
-    debugger;
-    // Инициализируем форму
-    let temp1 = `${this.Types.indexOf(this.localState.typeValue) + 1}: ${this.localState.typeValue}`
-    let temp2 = `${this.Filters.indexOf(this.localState.filterValue) + 1}: ${this.localState.filterValue}`
-    debugger;
     this.form = this.fb.group({
       // задаем поля формы следующим образом:
       // 1) указываем номер option'a
@@ -43,7 +38,6 @@ export class ParametersComponent implements OnInit {
   }
 
   changeType(e: any) {
-    debugger
     this.typeValue?.setValue(e.target.value, {
       onlySelf: true,
     });
@@ -64,7 +58,6 @@ export class ParametersComponent implements OnInit {
   }
 
   onSubmit(): void {
-    debugger
     // undefined если нет данных в поле
     let typeValue: string = this.form.get('typeValue').value?.split(' ')[1]
     let filterValue: string = this.form.get('filterValue').value?.split(' ')[1]
@@ -74,19 +67,10 @@ export class ParametersComponent implements OnInit {
     if(typeValue) {
       type = typeValue
     } 
-    // else if(sessionStorage.getItem('type')) {
-    //   type = sessionStorage.getItem('type')
-    // }
 
     if(filterValue) {
       filter = filterValue
     } 
-    // else if(sessionStorage.getItem('filter')) {
-    //   filter = sessionStorage.getItem('filter')
-    // }
-
-    // let typeValue = "small" // temp data
-    // let filterValue = "blur" // temp data
 
     this.isSubmitted = true;
     if (!this.form.valid) {

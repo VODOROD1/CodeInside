@@ -1,7 +1,0 @@
-<div *ngIf="localState.currentImgBase64.value !== ''; else loader">
-  <img src="{{ localState.currentImgBase64.value }}" alt="cat-img" />
-</div>
-
-<ng-template #loader>
-  <h4>Пока что ничего нет :(</h4>
-</ng-template>
